@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discipline Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Month-based life routine system</p>
+          <h1>Discipline Tracker</h1>
+          <p class="hero-copy">
+            Break a 1-month goal into daily actions, score your progress, and
+            track momentum day by day.
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span>Total Points</span>
+            <strong id="totalPoints">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Current Streak</span>
+            <strong id="currentStreak">0 days</strong>
+          </div>
+          <div class="stat-card">
+            <span>Completion Rate</span>
+            <strong id="completionRate">0%</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel panel-accent">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">Monthly direction</p>
+              <h2>Long-Term Goals</h2>
+            </div>
+            <button id="resetDataButton" type="button" class="ghost-button">
+              Reset Data
+            </button>
+          </div>
+
+          <form id="goalForm" class="stack-form">
+            <label>
+              <span>Goal title</span>
+              <input
+                id="goalTitle"
+                name="goalTitle"
+                type="text"
+                placeholder="Master DSA"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Description</span>
+              <textarea
+                id="goalDescription"
+                name="goalDescription"
+                rows="3"
+                placeholder="Complete graphs, DP, trees, and weekly revision."
+              ></textarea>
+            </label>
+
+            <div class="form-row">
+              <label>
+                <span>Monthly target points</span>
+                <input
+                  id="goalTarget"
+                  name="goalTarget"
+                  type="number"
+                  min="10"
+                  value="120"
+                  required
+                />
+              </label>
+
+              <label>
+                <span>Color tag</span>
+                <input
+                  id="goalColor"
+                  name="goalColor"
+                  type="color"
+                  value="#ff7a59"
+                />
+              </label>
+            </div>
+
+            <button type="submit" class="primary-button">Add Goal</button>
+          </form>
+
+          <div id="goalsList" class="goal-grid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">Daily execution</p>
+              <h2>Task Journal</h2>
+            </div>
+            <label class="date-picker">
+              <span>Date</span>
+              <input id="taskDate" type="date" />
+            </label>
+          </div>
+
+          <form id="taskForm" class="stack-form">
+            <label>
+              <span>Task</span>
+              <input
+                id="taskTitle"
+                name="taskTitle"
+                type="text"
+                placeholder="Solve one dynamic programming problem"
+                required
+              />
+            </label>
+
+            <div class="form-row">
+              <label>
+                <span>Linked goal</span>
+                <select id="taskGoalId" name="taskGoalId" required></select>
+              </label>
+
+              <label>
+                <span>Points</span>
+                <input
+                  id="taskPoints"
+                  name="taskPoints"
+                  type="number"
+                  min="1"
+                  max="50"
+                  value="10"
+                  required
+                />
+              </label>
+            </div>
+
+            <label>
+              <span>Category</span>
+              <input
+                id="taskCategory"
+                name="taskCategory"
+                type="text"
+                placeholder="DP / Graphs / Revision / Fitness"
+                required
+              />
+            </label>
+
+            <button type="submit" class="primary-button">Add Task</button>
+          </form>
+
+          <div class="daily-summary">
+            <div>
+              <span class="summary-label">Selected day score</span>
+              <strong id="selectedDayScore">0 pts</strong>
+            </div>
+            <div>
+              <span class="summary-label">Tasks completed</span>
+              <strong id="selectedDayCount">0</strong>
+            </div>
+          </div>
+
+          <div id="taskList" class="task-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">Progress tracking</p>
+              <h2>Month Overview</h2>
+            </div>
+          </div>
+
+          <div id="progressCards" class="progress-cards"></div>
+
+          <div class="chart-wrap">
+            <div class="chart-head">
+              <h3>Day-wise Score</h3>
+              <span id="monthLabel"></span>
+            </div>
+            <div id="scoreChart" class="score-chart"></div>
+          </div>
+
+          <div class="history-wrap">
+            <div class="chart-head">
+              <h3>Recent Check-ins</h3>
+            </div>
+            <div id="historyList" class="history-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="emptyStateTemplate">
+      <div class="empty-state">
+        <p>No data yet. Start by creating a monthly goal.</p>
+      </div>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
